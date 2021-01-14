@@ -1,0 +1,104 @@
+
+<html>
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>我要提问</title>
+    <script src="../js/jquery_3.2.1.js"></script>
+  </head>
+  <script type="text/javascript">
+  $(function(){
+      var id=location.search.substring(1);
+
+      $.get("../info/getDetails?id="+id,function (data) {
+
+          var h=$("#info").find("ul:first");
+
+          h.html(data.title);
+
+
+
+          $.each(data.rep,function (i,d) {
+              var h=$("#reply").find("ul:first").clone();
+              h.children().eq(0).html(d.replyTime);
+              h.children().eq(1).html(d.content);
+              $t.append(h)
+          });
+
+      });
+
+
+        $("#t").click(function(){
+            alert(id);
+            var content=$("#content").val();
+            if(content==null||content==''){
+                $("#msg").css("visibility","visible");
+                return true;
+            }
+
+            $.ajax({
+                type:"post",
+                url:"../info/addReply",
+                data: {
+                    id: id,
+                    content: content
+                },
+                dataType:"json",
+                success:function (result) {
+                    alert(result);
+                    if(result==true){
+                        window.location.reload();
+                    }else{
+                        alert("添加失败");
+
+                    }
+                }
+
+            });
+            return false;
+        });
+
+
+
+
+
+		});
+	
+  </script>
+  <body>
+  <h1 align="center">我&nbsp要&nbsp提&nbsp问</h1>
+    <div>
+        <label id="info">
+            <ul>
+                <li></li>
+                <li>发表于：</li>
+                <li>发表于：</li>
+            </ul>
+        </label>
+
+        <div>
+
+            <label id="reply">
+                <ul>
+                    <li>读者回应</li>
+                    <li>读者回应</li>
+                </ul>
+            </label>
+        </div>
+        <form class="layui-form">
+
+            <div>
+                <h2>快速回复（字数200字以内）</h2>
+                <textarea style="width: 200px; height: 50px" id="content"></textarea>
+                <span style="color: red ;visibility:hidden;" id="msg">请填写回复内容</span></br>
+                <input type="button" value="提交" id="t">
+            </div>
+
+
+              <a href="index.html" style="display: block; text-align: center;" >返回首页</a>
+
+      </form>
+    </div>
+
+  </body>
+</html>

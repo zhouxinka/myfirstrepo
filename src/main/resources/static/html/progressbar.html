@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>ProgressBar</title>
+            <style>
+                *{
+                    margin: 0;
+                    padding: 0;
+                }
+                #progress{
+                    width: 100%;
+                    height: 30px;
+                    background: rgb(42, 138, 248);
+                }
+                #bar{
+                    width: 1%;
+                    height: 28px;
+                    margin-top: 1px;
+                    background: purple;
+                }
+
+            </style>
+
+        </head>
+        <body>
+            <div id="progress">
+                <div id="bar"></div>
+            </div>
+            <div>
+                <h3 id="text-progress">0%</h3>
+            </div>
+            <input type="button" id=“btn” value="点击开始" onclick="action()">
+        </body>
+<script>
+        function action(){
+                 var iSpeed=1;
+                    obj=setInterval(function(){
+                           iSpeed+=1;
+                          if(iSpeed>=100){    // 设置达到多少进度后停止
+                                clearInterval(obj);
+                                  }
+                            bar.style.width=iSpeed+'';
+                            document.getElementById('text-progress').innerHTML=iSpeed+'';
+
+                       },1000);    // 1s后函数执行一次
+                }
+</script>
+    </html>

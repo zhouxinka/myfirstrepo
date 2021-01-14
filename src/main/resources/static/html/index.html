@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        首页
+    </title>
+    <script src="../js/jquery_3.2.1.js"></script>
+    <style>
+        table tr:nth-child(odd){
+            background: LightSkyBlue;
+        }
+
+    </style>
+    <script>
+        $(function(){
+
+            $.getJSON(
+                "../info/getAllInfo",
+                function (data) {
+                    var $t=$("#info");
+                    $.each(data,function(i,d){
+                        var h=$t.find("tr:first").clone();
+
+                        h.children().eq(0).html(d.id);
+                        h.children().eq(1).html("<a style=\"text-decoration: none\" href='infoDetail.html?"+d.id+"'>"+d.title+"</a>");
+                        h.children().eq(2).html(d.replyCount+"/"+d.viewCount);
+                        h.children().eq(3).html(d.reportTime);
+                        h.children().eq(4).html(d.lastPostTime);
+                        $t.append(h);
+                    });
+
+
+
+                });
+
+        });
+    </script>
+</head>
+<body>
+<h1 align="center">手机咨询</h1>
+
+
+<div>
+    <table id="info" border="1" align="center" cellspacing="0" cellpadding="0" width="80%">
+        <tr>
+            <td align="center" valign="middle">
+                序号
+            </td>
+            <td align="center" valign="middle">
+                标题
+            </td>
+            <td align="center" valign="middle">
+                回复/查看
+            </td>
+            <td align="center" valign="middle">
+                发表时间
+            </td>
+            <td align="center" valign="middle">
+                最新回复
+            </td>
+            <td align="center" valign="middle">
+                操作
+            </td>
+        </tr>
+    </table>
+
+</div>
+</body>
+</html>
