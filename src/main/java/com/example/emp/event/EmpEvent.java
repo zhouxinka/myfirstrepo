@@ -6,5 +6,6 @@ public class EmpEvent extends ApplicationEvent {
     public EmpEvent(Object source) {
         super(source);
         int i;
+        int j;
     }
 }
