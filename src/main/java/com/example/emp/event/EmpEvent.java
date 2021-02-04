@@ -8,5 +8,6 @@ public class EmpEvent extends ApplicationEvent {
         int i;
         int j;
         int mmm;
+        int o=0;
     }
 }
